@@ -19,7 +19,7 @@ const ChatArea = ({ user }) => {
         const token = localStorage.getItem("token");
         if (!token) return;
 
-        const res = await fetch("http://localhost:5000/api/chat/history", {
+        const res = await fetch("https://edubot-backend-3.onrender.com/api/chat/history", {
           headers: { Authorization: `Bearer ${token}` },
         });
 
@@ -56,7 +56,7 @@ const ChatArea = ({ user }) => {
 
     setLoading(true);
     try {
-      const res = await fetch("http://localhost:5000/api/chat", {
+      const res = await fetch("https://edubot-backend-3.onrender.com/api/chat", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -104,7 +104,7 @@ const ChatArea = ({ user }) => {
 
     setLoading(true);
     try {
-      const res = await fetch(`http://localhost:5000/api/chat/${endpoint}`, {
+      const res = await fetch(`https://edubot-backend-3.onrender.com/api/chat/${endpoint}`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,

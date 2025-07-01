@@ -22,7 +22,7 @@ const ChangePasswordModal = ({ isOpen, onClose }) => {
     try {
       const token = localStorage.getItem("token");
       const res = await axios.post(
-        "http://localhost:5000/api/user/change-password",
+        "https://edubot-backend-3.onrender.com/api/user/change-password",
         { oldPassword, newPassword },
         {
           headers: {
@@ -126,7 +126,7 @@ const Settings = () => {
       const token = localStorage.getItem("token");
 
       const res = await axios.put(
-        "http://localhost:5000/api/user/update-profile",
+        "https://edubot-backend-3.onrender.com/api/user/update-profile",
         {
           name: user.name,
           email: user.email,
@@ -165,7 +165,7 @@ const Settings = () => {
 
     try {
       const token = localStorage.getItem("token");
-      await axios.delete("http://localhost:5000/api/user/delete-account", {
+      await axios.delete("https://edubot-backend-3.onrender.com/api/user/delete-account", {
         headers: { Authorization: `Bearer ${token}` },
       });
 
