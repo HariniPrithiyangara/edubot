@@ -1,12 +1,27 @@
-# React + Vite
+# EduBot Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+EduBot is an AI-powered chatbot web application that helps students get academic support. This is the frontend part of the full-stack project, built using **React**, **Tailwind CSS**, and deployed on **Vercel**.
 
-Currently, two official plugins are available:
+## 🚀 Live Demo
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+👉 [Try EduBot Now](https://edubot-815x-git-main-harini-prithiyangara-bs-projects.vercel.app)
 
-## Expanding the ESLint configuration
+## 🔥 Features
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- 👤 User Authentication (Signup/Login)
+- 💬 Chat interface with AI-powered answers
+- 📂 Upload PDFs and Images for file-based Q&A
+- 📘 Subject dropdown to guide EduBot responses
+
+
+## 🛠️ Tech Stack
+
+- **React** + **React Router**
+- **Tailwind CSS**
+- **Lucide-react Icons**
+- **Axios** for API calls
+- **React Hot Toast** for notifications
+
+## 🔗 Backend API
+
+The frontend communicates with a deployed backend:
