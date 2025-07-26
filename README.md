@@ -4,7 +4,7 @@ EduBot is an AI-powered chatbot web application that helps students get academic
 
 ## 🚀 Live Demo
 
-👉 [Try EduBot Now](https://edubot-815x-git-main-harini-prithiyangara-bs-projects.vercel.app)
+👉 [Try EduBot Now](https://https://edubot-assist.vercel.app/)
 
 ## 🔥 Features
 
