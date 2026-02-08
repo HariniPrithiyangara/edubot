@@ -21,8 +21,9 @@ const ChangePasswordModal = ({ isOpen, onClose }) => {
     e.preventDefault();
     try {
       const token = localStorage.getItem("token");
+      const apiUrl = window.API_URL || import.meta.env.VITE_API_URL_PROD;
       const res = await axios.post(
-        `${import.meta.env.VITE_API_URL}/api/user/change-password`,
+        `${apiUrl}/api/user/change-password`,
         { oldPassword, newPassword },
         {
           headers: {
@@ -126,8 +127,9 @@ const Settings = () => {
     try {
       const token = localStorage.getItem("token");
 
+      const apiUrl = window.API_URL || import.meta.env.VITE_API_URL_PROD;
       const res = await axios.put(
-        `${import.meta.env.VITE_API_URL}/api/user/update-profile`,
+        `${apiUrl}/api/user/update-profile`,
         {
           name: user.name,
           email: user.email,
@@ -166,7 +168,8 @@ const Settings = () => {
 
     try {
       const token = localStorage.getItem("token");
-      await axios.delete(`${import.meta.env.VITE_API_URL}/api/user/delete-account`, {
+      const apiUrl = window.API_URL || import.meta.env.VITE_API_URL_PROD;
+      await axios.delete(`${apiUrl}/api/user/delete-account`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 

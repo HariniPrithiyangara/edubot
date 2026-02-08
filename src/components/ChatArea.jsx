@@ -19,7 +19,8 @@ const ChatArea = ({ user }) => {
         const token = localStorage.getItem("token");
         if (!token) return;
 
-        const res = await fetch(`${import.meta.env.VITE_API_URL}/api/chat/history`, {
+        const apiUrl = window.API_URL || import.meta.env.VITE_API_URL_PROD;
+        const res = await fetch(`${apiUrl}/api/chat/history`, {
           headers: { Authorization: `Bearer ${token}` },
         });
 
@@ -56,7 +57,8 @@ const ChatArea = ({ user }) => {
 
     setLoading(true);
     try {
-      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/chat`, {
+      const apiUrl = window.API_URL || import.meta.env.VITE_API_URL_PROD;
+      const res = await fetch(`${apiUrl}/api/chat`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -104,7 +106,8 @@ const ChatArea = ({ user }) => {
 
     setLoading(true);
     try {
-      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/chat/${endpoint}`, {
+      const apiUrl = window.API_URL || import.meta.env.VITE_API_URL_PROD;
+      const res = await fetch(`${apiUrl}/api/chat/${endpoint}`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,

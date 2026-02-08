@@ -28,7 +28,8 @@ const Signup = () => {
     try {
       setLoading(true);
 
-      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/signup`, {
+      const apiUrl = window.API_URL || import.meta.env.VITE_API_URL_PROD;
+      const res = await fetch(`${apiUrl}/api/auth/signup`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
