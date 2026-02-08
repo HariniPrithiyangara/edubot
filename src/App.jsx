@@ -14,24 +14,46 @@ import ForgotPassword from "./pages/ForgotPassword"; // ✅ New
 import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
-  // 🔍 Backend Health Check
+  // 🔍 Backend Health Check & Auto-Discovery
   useEffect(() => {
     const checkBackend = async () => {
-      const apiUrl = import.meta.env.VITE_API_URL;
-      console.log(`🔌 Connecting to Backend: ${apiUrl}`);
+      // 1. Get all potential URLs from env
+      const localUrl = import.meta.env.VITE_API_URL_LOCAL;
+      const prodUrl = import.meta.env.VITE_API_URL_PROD;
 
-      try {
-        const res = await fetch(`${apiUrl}/`);
-        if (res.ok) {
-          console.log("✅ Backend Connected!");
-          toast.success(`Connected to Backend:\n${apiUrl}`, { duration: 4000 });
-        } else {
-          throw new Error("Backend reachable but returned error");
+      console.log("🔍 Checking Backends...");
+
+      // Helper function to test a URL
+      const testUrl = async (url) => {
+        if (!url) return false;
+        try {
+          const res = await fetch(`${url}/`);
+          return res.ok;
+        } catch (e) {
+          return false;
         }
-      } catch (err) {
-        console.error("❌ Backend Connection Failed", err);
-        toast.error(`backend connection failed:\n${apiUrl}\nCheck console for details.`, { duration: 6000 });
+      };
+
+      // 2. Try Localhost First (Priority)
+      if (await testUrl(localUrl)) {
+        window.API_URL = localUrl;
+        console.log(`✅ Using LOCAL Backend: ${localUrl}`);
+        toast.success(`Connected to LOCAL Backend:\n${localUrl}`);
+        return;
       }
+
+      // 3. Try Production Second (Fallback)
+      if (await testUrl(prodUrl)) {
+        window.API_URL = prodUrl;
+        console.log(`✅ Using PROD Backend: ${prodUrl}`);
+        toast.success(`Connected to PROD Backend:\n${prodUrl}`);
+        return;
+      }
+
+      // 4. Both Failed
+      console.error("❌ No Backend Reachable");
+      window.API_URL = prodUrl; // Default to prod even if failed
+      toast.error("❌ Could not connect to any backend!");
     };
 
     checkBackend();
