@@ -20,7 +20,8 @@ const Login = () => {
     try {
       setLoading(true);
 
-      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/login`, {
+      const apiUrl = window.API_URL || import.meta.env.VITE_API_URL_PROD;
+      const res = await fetch(`${apiUrl}/api/auth/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
@@ -55,7 +56,8 @@ const Login = () => {
   const handleForgotSubmit = async (e) => {
     e.preventDefault();
 
-    const res = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/forgot-password`, {
+    const apiUrl = window.API_URL || import.meta.env.VITE_API_URL_PROD;
+    const res = await fetch(`${apiUrl}/api/auth/forgot-password`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email: forgotEmail }),
