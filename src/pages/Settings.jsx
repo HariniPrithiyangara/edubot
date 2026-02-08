@@ -22,7 +22,7 @@ const ChangePasswordModal = ({ isOpen, onClose }) => {
     try {
       const token = localStorage.getItem("token");
       const res = await axios.post(
-        "https://edubot-backend-3.onrender.com/api/user/change-password",
+        `${import.meta.env.VITE_API_URL}/api/user/change-password`,
         { oldPassword, newPassword },
         {
           headers: {
@@ -107,6 +107,7 @@ const Settings = () => {
       setUser(parsed);
       setInitialUser(parsed);
     } catch (err) {
+      console.error(err);
       toast.error("Session expired. Please login again.");
       localStorage.clear();
       navigate("/login");
@@ -126,7 +127,7 @@ const Settings = () => {
       const token = localStorage.getItem("token");
 
       const res = await axios.put(
-        "https://edubot-backend-3.onrender.com/api/user/update-profile",
+        `${import.meta.env.VITE_API_URL}/api/user/update-profile`,
         {
           name: user.name,
           email: user.email,
@@ -165,7 +166,7 @@ const Settings = () => {
 
     try {
       const token = localStorage.getItem("token");
-      await axios.delete("https://edubot-backend-3.onrender.com/api/user/delete-account", {
+      await axios.delete(`${import.meta.env.VITE_API_URL}/api/user/delete-account`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -219,9 +220,8 @@ const Settings = () => {
                   src={url}
                   alt={seed}
                   onClick={() => setUser({ ...user, avatar: url })}
-                  className={`h-14 w-14 rounded-full border-2 cursor-pointer ${
-                    user.avatar === url ? "border-purple-500" : "border-gray-600"
-                  }`}
+                  className={`h-14 w-14 rounded-full border-2 cursor-pointer ${user.avatar === url ? "border-purple-500" : "border-gray-600"
+                    }`}
                 />
               );
             })}
@@ -315,9 +315,8 @@ const Settings = () => {
         <button
           onClick={handleSave}
           disabled={!hasChanges || isLoading}
-          className={`w-full py-2 bg-purple-600 hover:bg-purple-700 rounded-xl font-semibold ${
-            (!hasChanges || isLoading) ? "opacity-50 cursor-not-allowed" : ""
-          }`}
+          className={`w-full py-2 bg-purple-600 hover:bg-purple-700 rounded-xl font-semibold ${(!hasChanges || isLoading) ? "opacity-50 cursor-not-allowed" : ""
+            }`}
         >
           {isLoading ? "Saving..." : "Save Changes"}
         </button>
