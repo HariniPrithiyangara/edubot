@@ -17,13 +17,11 @@ function App() {
   // 🔍 Backend Health Check & Auto-Discovery
   useEffect(() => {
     const checkBackend = async () => {
-      // 1. Get all potential URLs from env
       const localUrl = import.meta.env.VITE_API_URL_LOCAL;
       const prodUrl = import.meta.env.VITE_API_URL_PROD;
 
-      console.log("🔍 Checking Backends...");
+      console.log("🔍 Testing Backend Connection...");
 
-      // Helper function to test a URL
       const testUrl = async (url) => {
         if (!url) return false;
         try {
@@ -34,25 +32,27 @@ function App() {
         }
       };
 
-      // 2. Try Localhost First (Priority)
-      if (await testUrl(localUrl)) {
-        window.API_URL = localUrl;
-        console.log(`✅ Using LOCAL Backend: ${localUrl}`);
-        toast.success(`Connected to LOCAL Backend:\n${localUrl}`);
-        return;
+      // 1. If running locally, check if local backend is up
+      if (import.meta.env.DEV) {
+        if (await testUrl(localUrl)) {
+          window.API_URL = localUrl;
+          console.log(`✅ Using LOCAL Backend: ${localUrl}`);
+          return;
+        } else {
+           console.warn(`⚠️ LOCAL Backend not found at ${localUrl}. Falling back to PROD.`);
+        }
       }
 
-      // 3. Try Production Second (Fallback)
+      // 2. Default to Production Backend
       if (await testUrl(prodUrl)) {
         window.API_URL = prodUrl;
         console.log(`✅ Using PROD Backend: ${prodUrl}`);
-        toast.success(`Connected to PROD Backend:\n${prodUrl}`);
         return;
       }
 
-      // 4. Both Failed
+      // 3. Both Failed
       console.error("❌ No Backend Reachable");
-      window.API_URL = prodUrl; // Default to prod even if failed
+      window.API_URL = prodUrl; // Default to prod anyway
       toast.error("❌ Could not connect to any backend!");
     };
 
